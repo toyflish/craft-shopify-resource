@@ -1,0 +1,43 @@
+{
+    "name": "devkai/craft-shopify-resource",
+    "description": "shopify-resource reference field via storefront api",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "craft-shopify-resource"
+    ],
+    "support": {
+        "docs": "https://github.com/toyflish/craft-shopify-resource/blob/master/README.md",
+        "issues": "https://github.com/toyflish/craft-shopify-resource/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "devkai",
+            "homepage": "https://toyflish.com"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+          "devkai\\craftshopifyresource\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "craft-shopify-resource",
+        "handle": "craft-shopify-resource",
+        "hasCpSettings": true,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/toyflish/craft-shopify-resource/master/CHANGELOG.md",
+        "components": {
+            "storefront": "devkai\\craftshopifyresource\\services\\Storefront"
+        },
+        "class": "devkai\\craftshopifyresource\\Craftshopifyresource"
+    }
+}

@@ -1,0 +1,26 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * craft-shopify-resource plugin for Craft CMS
+ *
+ * Resource Field Settings
+ *
+ * @author    devkai
+ * @copyright Copyright (c) 2020 devkai
+ * @link      https://toyflish.com
+ * @package   Craftshopifyresource
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("devkai\\craftshopifyresource\\assetbundles\\craftshopifyresource\\CraftshopifyresourceAsset") %}
+
+{{ forms.textField({
+    label: 'Some Attribute',
+    instructions: 'Enter some attribute here.',
+    id: 'someAttribute',
+    name: 'someAttribute',
+    value: field['someAttribute']})
+}}
