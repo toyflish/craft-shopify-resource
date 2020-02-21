@@ -2,7 +2,8 @@
 
 shopify-resource reference field via storefront api
 
-![Screenshot](resources/img/plugin-logo.png)
+store shopify storefront id in craft field with dropdown select using shopify storefront api
+
 
 ## Requirements
 
@@ -24,20 +25,21 @@ To install the plugin, follow these instructions.
 
 ## craft-shopify-resource Overview
 
--Insert text here-
+adds a shopify resource select field to your control panel
 
 ## Configuring craft-shopify-resource
 
--Insert text here-
+```
+return [
+    'accessToken' => getenv('SHOPIFY_ACCESS_TOKEN'),
+    'hostname' => getenv('SHOPIFY_HOSTNAME'),
+    'hostnameOverwrite' => getenv('SHOPIFY_HOSTNAME_PUBLIC'),
+    'locale' => 'en'
+];
+```
 
 ## Using craft-shopify-resource
 
--Insert text here-
 
-## craft-shopify-resource Roadmap
-
-Some things to do, and ideas for potential features:
-
-* Release it
 
 Brought to you by [devkai](https://toyflish.com)

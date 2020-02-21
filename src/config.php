@@ -23,8 +23,8 @@
  */
 
 return [
-
-    // This controls blah blah blah
-    "someAttribute" => true,
-
+    'accessToken' => getenv('SHOPIFY_ACCESS_TOKEN'),
+    'hostname' => getenv('SHOPIFY_HOSTNAME'),
+    'hostnameOverwrite' => getenv('SHOPIFY_HOSTNAME_PUBLIC'),
+    'locale' => 'en'
 ];
