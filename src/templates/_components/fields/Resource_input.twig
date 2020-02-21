@@ -15,6 +15,7 @@
 
 {% import "_includes/forms" as forms %}
 
+
 {{ forms.textField({
         label: 'Some Field',
         instructions: 'Enter some text here.',
@@ -22,3 +23,7 @@
         name: name,
         value: value})
 }}
+<!--<div class="shopify-resource-select">
+        shopify-resource-select
+        {{ hiddenInput(name, value, {id: name }) }}
+</div>-->

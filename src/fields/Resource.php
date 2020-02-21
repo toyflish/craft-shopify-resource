@@ -112,12 +112,18 @@ class Resource extends Field
         $id = Craft::$app->getView()->formatInputId($this->handle);
         $namespacedId = Craft::$app->getView()->namespaceInputId($id);
 
+        $settings = \devkai\craftshopifyresource\Craftshopifyresource::getInstance()->getSettings();
+
         // Variables to pass down to our field JavaScript to let it namespace properly
         $jsonVars = [
             'id' => $id,
             'name' => $this->handle,
             'namespace' => $namespacedId,
             'prefix' => Craft::$app->getView()->namespaceInputId(''),
+            'accessToken' => $settings['accessToken'],
+            'hostname' => $settings['hostname'],
+            'hostnameOverwrite' => $settings['hostnameOverwrite'],
+            'locale' => $settings['locale']
             ];
         $jsonVars = Json::encode($jsonVars);
         Craft::$app->getView()->registerJs("$('#{$namespacedId}-field').CraftshopifyresourceResource(" . $jsonVars . ");");

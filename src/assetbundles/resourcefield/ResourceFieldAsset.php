@@ -36,7 +36,7 @@ class ResourceFieldAsset extends AssetBundle
         ];
 
         $this->js = [
-            'js/Resource.js',
+            'main.js',
         ];
 
         $this->css = [
