@@ -122,6 +122,7 @@ class Resource extends Field
             'prefix' => Craft::$app->getView()->namespaceInputId(''),
             'accessToken' => $settings['accessToken'],
             'hostname' => $settings['hostname'],
+            'endpoint' => $settings->endpoint(),
             'hostnameOverwrite' => $settings['hostnameOverwrite'],
             'locale' => $settings['locale']
             ];

@@ -3,7 +3,9 @@
 shopify-resource reference field via storefront api
 
 store shopify storefront id in craft field with dropdown select using shopify storefront api
-
+use shopify products in craft fields highly inspired by nmaier95/craft-shopify-product-fetcher but using the shopify storefront api
+- send custom graphql queries to get resized images from shopify
+- async clientside queries in cp do not slow down cp rendering with mutliple product fields
 
 ## Requirements
 
@@ -28,6 +30,7 @@ To install the plugin, follow these instructions.
 adds a shopify resource select field to your control panel
 
 ## Configuring craft-shopify-resource
+expects storefront-api credentials and locale settings to enable queries to the new shopify mutlilanguage api
 
 ```
 return [
@@ -39,7 +42,46 @@ return [
 ```
 
 ## Using craft-shopify-resource
+you can use the plugin provided query (simular to shopify buy sdks product query)
+or submit a custom query setup in twig
+```
+<p>
+    <h2>Entry resource field with handle myResource</h2>
+    shopify storefront id: {{entry.myResource}}
 
+    <p>use product query provided by plugin</p>
+    {%  set myResourceProduct  = craft.storefront.productById(entry.myResource) %}
+
+    {% if myResourceProduct %}
+        title : {{ myResourceProduct.title }}
+    {% else %}
+        myResource product not found
+    {% endif %}
+</p>
+
+<p>
+    <h2>Custom Query: list of products</h2>
+    {% set query %}
+        query searchProducts($term: String) {
+            products(first: 250, query: $term) {
+                edges {
+                    node {
+                        id
+                        title
+                    }
+                }
+            }
+        }
+    {% endset %}
+    {% set productsResult = craft.storefront.query(query)['products']['edges'] %}
+    {% if productsResult|length %}
+        <h3>Product list</h3>
+        {% for product in  productsResult|map(product => product.node) %}
+            <p>{{ product.title }}</p>
+        {% endfor %}
+    {% endif %}
+</p>
+``
 
 
 Brought to you by [devkai](https://toyflish.com)

@@ -12,16 +12,18 @@
 
 import { GraphQLClient } from 'graphql-request'
 
-const allProductsQuery = `query {
-  products(first:250){
-    edges {
-      node {
-        id
-        title
+const allProductsQuery = `query
+  searchProducts($term: String) {
+      products(first: 250, query: $term) {
+        edges {
+          node {
+            id
+            title
+          }
+        }
       }
-    }
-  }
-}`
+}
+ `
 
 ;(function ( $, window, document, undefined ) {
 
@@ -45,7 +47,8 @@ const allProductsQuery = `query {
 
     Plugin.prototype = {
         buildSelect: function(selectOptions, selectedId) {
-            const $select = $('<select>').appendTo(this.element.querySelector('.input'));
+            const $select = $('<select>').appendTo(this.element.querySelector('.input .select'));
+            $('<option value> -- none -- </option>').appendTo($select)
             $(selectOptions).each(function() {
                 const option =  $("<option>").appendTo($select)
                 option.attr('value',this.id).text(this.title)
@@ -60,13 +63,11 @@ const allProductsQuery = `query {
 
         init: function(id) {
             var _this = this;
+            console.log({id})
 
             $(function () {
-                const $input = $(_this.element).find("input[name=\"fields[myResource]\"]")
-                _this.input = $input.get(0)
-                const value = $input.val()
-                const { hostname, accessToken, locale } = _this.options;
-                const endpoint = `https://${hostname}/api/2020-01/graphql`
+                const { namespace, endpoint, accessToken, locale } = _this.options;
+                _this.input = document.getElementById(namespace)
 
                 const graphQLClient = new GraphQLClient(endpoint, {
                     headers: {
@@ -79,7 +80,7 @@ const allProductsQuery = `query {
                     .then(data => {
                         window.data = data
                         const options = data.products.edges.map(e => e.node)
-                        _this.buildSelect(options, value)
+                        _this.buildSelect(options, _this.input.value)
                         console.log({_this})
                         window._this = _this
                     })

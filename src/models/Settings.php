@@ -14,6 +14,7 @@ use devkai\craftshopifyresource\Craftshopifyresource;
 
 use Craft;
 use craft\base\Model;
+use phpDocumentor\Reflection\Types\String_;
 
 /**
  * @author    devkai
@@ -46,4 +47,10 @@ class Settings extends Model
             [['accessToken','hostname','hostnameOverwrite','locale'], 'required']
         ];
     }
+    public function endpoint()
+    {
+        return "https://". $this->hostname ."/api/2020-01/graphql";
+
+    }
+
 }

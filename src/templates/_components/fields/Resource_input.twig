@@ -16,14 +16,13 @@
 {% import "_includes/forms" as forms %}
 
 
-{{ forms.textField({
+<div class="select">
+</div>
+
+{{ forms.hidden({
         label: 'Some Field',
         instructions: 'Enter some text here.',
         id: name,
         name: name,
         value: value})
 }}
-<!--<div class="shopify-resource-select">
-        shopify-resource-select
-        {{ hiddenInput(name, value, {id: name }) }}
-</div>-->

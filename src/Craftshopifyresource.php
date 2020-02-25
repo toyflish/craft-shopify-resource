@@ -11,7 +11,7 @@
 namespace devkai\craftshopifyresource;
 
 use devkai\craftshopifyresource\services\Storefront as StorefrontService;
-use devkai\craftshopifyresource\variables\CraftshopifyresourceVariable;
+use devkai\craftshopifyresource\variables\StorefrontVariable;
 use devkai\craftshopifyresource\models\Settings;
 use devkai\craftshopifyresource\fields\Resource as ResourceField;
 
@@ -63,6 +63,10 @@ class Craftshopifyresource extends Plugin
         parent::init();
         self::$plugin = $this;
 
+        $this->setComponents([
+            'storefront' => services\Storefront::class,
+        ]);
+
         Event::on(
             Fields::class,
             Fields::EVENT_REGISTER_FIELD_TYPES,
@@ -77,7 +81,7 @@ class Craftshopifyresource extends Plugin
             function (Event $event) {
                 /** @var CraftVariable $variable */
                 $variable = $event->sender;
-                $variable->set('craftshopifyresource', CraftshopifyresourceVariable::class);
+                $variable->set('storefront', StorefrontVariable::class);
             }
         );
 
@@ -123,4 +127,5 @@ class Craftshopifyresource extends Plugin
             ]
         );
     }
+
 }

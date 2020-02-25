@@ -19,21 +19,17 @@ use Craft;
  * @package   Craftshopifyresource
  * @since     1.0.0
  */
-class CraftshopifyresourceVariable
+class StorefrontVariable
 {
     // Public Methods
     // =========================================================================
 
-    /**
-     * @param null $optional
-     * @return string
-     */
-    public function exampleVariable($optional = null)
+    public function getProductById($id)
     {
-        $result = "And away we go to the Twig template...";
-        if ($optional) {
-            $result = "I'm feeling optional today...";
-        }
-        return $result;
+        return Craftshopifyresource::getInstance()->storefront->getProductById($id);
+    }
+    public function query($query, $variables = [])
+    {
+        return Craftshopifyresource::getInstance()->storefront->query($query, $variables = []);
     }
 }
