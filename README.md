@@ -2,8 +2,9 @@
 
 shopify-resource reference field via storefront api
 
-store shopify storefront id in craft field with dropdown select using shopify storefront api
-use shopify products in craft fields highly inspired by nmaier95/craft-shopify-product-fetcher but using the shopify storefront api
+store shopify storefront id in craft field with dropdown using shopify storefront api
+
+use shopify products and collecitons in craft fields,  highly inspired by [nmaier95/craft-shopify-product-fetcher](https://github.com/nmaier95/craft-shopify-product-fetcher) but using the shopify storefront api, therefore ids compatible with [shopify buy sdk](https://github.com/Shopify/js-buy-sdk)
 - send custom graphql queries to get resized images from shopify
 - async clientside queries in cp do not slow down cp rendering with mutliple product fields
 
@@ -81,7 +82,7 @@ or submit a custom query setup in twig
         {% endfor %}
     {% endif %}
 </p>
-``
+```
 
 
 Brought to you by [devkai](https://toyflish.com)

@@ -24,6 +24,18 @@ const allProductsQuery = `query
       }
 }
  `
+const allCollectionsQuery = `query
+    searchCollections($term: String) {
+      collections(first: 250, query: $term) {
+        edges {
+          node {
+            id
+            title
+          }
+        }
+      }
+    }
+ `
 
 ;(function ( $, window, document, undefined ) {
 
@@ -60,31 +72,36 @@ const allProductsQuery = `query
                 this.input.value = selected
             })
         },
-
+        execQuery: function(query) {
+            const { endpoint, accessToken, locale } = this.options;
+            const graphQLClient = new GraphQLClient(endpoint, {
+                headers: {
+                    'X-Shopify-Storefront-Access-Token': accessToken,
+                    'accept': 'application/json',
+                    'accept-language': locale
+                },
+            })
+            return graphQLClient.request(query)
+        },
         init: function(id) {
             var _this = this;
-            console.log({id})
 
             $(function () {
-                const { namespace, endpoint, accessToken, locale } = _this.options;
+                const { namespace, resourceType } = _this.options;
                 _this.input = document.getElementById(namespace)
 
-                const graphQLClient = new GraphQLClient(endpoint, {
-                    headers: {
-                        'X-Shopify-Storefront-Access-Token': accessToken,
-                        'accept': 'application/json',
-                        'accept-language': locale
-                    },
-                })
-                graphQLClient.request(allProductsQuery)
-                    .then(data => {
-                        window.data = data
-                        const options = data.products.edges.map(e => e.node)
-                        _this.buildSelect(options, _this.input.value)
-                        console.log({_this})
-                        window._this = _this
-                    })
-                    .catch(error => console.error(error))
+                if(resourceType === 'Collection') {
+                    _this.execQuery(allCollectionsQuery)
+                        .then(data => data.collections.edges.map(e => e.node))
+                        .then(options => _this.buildSelect(options, _this.input.value))
+                        .catch(error => console.error(error))
+                } else {
+                    // resourceType = Product
+                    _this.execQuery(allProductsQuery)
+                        .then(data => data.products.edges.map(e => e.node))
+                        .then(options => _this.buildSelect(options, _this.input.value))
+                        .catch(error => console.error(error))
+                }
             });
         }
     };

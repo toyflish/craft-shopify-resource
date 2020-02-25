@@ -58,7 +58,6 @@ class Resource extends Field
         $rules = array_merge($rules, [
             ['resourceType', 'string'],
             ['resourceType', 'default', 'value' => 'Product'],
-            ['resourceType', 'default', 'value' => 'Product'],
         ]);
         return $rules;
     }
@@ -135,7 +134,8 @@ class Resource extends Field
             'hostname' => $settings['hostname'],
             'endpoint' => $settings->endpoint(),
             'hostnameOverwrite' => $settings['hostnameOverwrite'],
-            'locale' => $settings['locale']
+            'locale' => $settings['locale'],
+            'resourceType' => $this->resourceType,
             ];
         $jsonVars = Json::encode($jsonVars);
         Craft::$app->getView()->registerJs("$('#{$namespacedId}-field').CraftshopifyresourceResource(" . $jsonVars . ");");
