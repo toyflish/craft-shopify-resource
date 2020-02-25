@@ -33,7 +33,7 @@ class Resource extends Field
     /**
      * @var string
      */
-    public $someAttribute = 'Some Default';
+    public $resourceType = 'Product';
 
     // Static Methods
     // =========================================================================
@@ -56,8 +56,9 @@ class Resource extends Field
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            ['someAttribute', 'string'],
-            ['someAttribute', 'default', 'value' => 'Some Default'],
+            ['resourceType', 'string'],
+            ['resourceType', 'default', 'value' => 'Product'],
+            ['resourceType', 'default', 'value' => 'Product'],
         ]);
         return $rules;
     }
@@ -96,6 +97,16 @@ class Resource extends Field
             'craft-shopify-resource/_components/fields/Resource_settings',
             [
                 'field' => $this,
+                'options' => [
+                    [
+                        'label' => 'Product',
+                        'value' => 'Product',
+                    ],
+                    [
+                        'label' => 'Collection',
+                        'value' => 'Collection',
+                    ],
+                ]
             ]
         );
     }

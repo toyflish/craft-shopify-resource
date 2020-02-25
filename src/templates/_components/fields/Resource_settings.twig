@@ -17,10 +17,13 @@
 
 {% do view.registerAssetBundle("devkai\\craftshopifyresource\\assetbundles\\craftshopifyresource\\CraftshopifyresourceAsset") %}
 
-{{ forms.textField({
-    label: 'Some Attribute',
+
+{{ forms.selectField({
+    label: 'Resource Type to select',
     instructions: 'Enter some attribute here.',
-    id: 'someAttribute',
-    name: 'someAttribute',
-    value: field['someAttribute']})
+    id: 'resourceType',
+    name: 'resourceType',
+    value: field['resourceType'],
+    options: options })
 }}
+
